@@ -14,7 +14,7 @@ import java.util.List;
  *
  * Created by Justine Lo on 10/31/2018.
  */
-public class CombineLists {
+public class Query {
 
   /**
    * Return HashMap of combined country and population data from database and concrete list.
@@ -30,15 +30,20 @@ public class CombineLists {
 
     // Combine Lists. If duplicate, use database data.
     for (int i = 0; i < concreteList.size(); i++) {
-      //add country from concrete list if it does not already exist in database list
-      if (!(databaseList.containsKey(concreteList.get(i).getKey()))) {
-        databaseList.put(concreteList.get(i).getKey(), concreteList.get(i).getValue());
+      String country = concreteList.get(i).getKey();
+      if (!(databaseList.containsKey(country))) {
+        if (country.equals("U.S.A.") || country.equals("United States of America")) {
+          if ((!(databaseList.containsKey("U.S.A."))) && (!(databaseList.containsKey("United States of America")))) {
+            databaseList.put(country, concreteList.get(i).getValue());
+          }
+        } else {
+          databaseList.put(country, concreteList.get(i).getValue());
+        }
       }
     }
 
     return databaseList;
   }
-
 
   /**
    * Retrieve Country and Population data from database.

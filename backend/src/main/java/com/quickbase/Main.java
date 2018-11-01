@@ -1,13 +1,18 @@
 package com.quickbase;
 
-import com.quickbase.devint.CombineLists;
+import com.quickbase.devint.Query;
 import com.quickbase.devint.DBManager;
 import com.quickbase.devint.DBManagerImpl;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
-import javax.sound.midi.SysexMessage;
+import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * The main method of the executable JAR generated from this repository. This is to let you
@@ -30,8 +35,8 @@ public class Main {
         //dbm.getTableInfo();
 
         // Get HashMap of combined country and population data from database and concrete list
-        CombineLists combineList = new CombineLists();
-        HashMap<String, Integer> finalList = combineList.combineCountryPopList(c);
+        Query myQuery = new Query();
+        HashMap<String, Integer> finalList = myQuery.combineCountryPopList(c);
 
         // Print out countries and populations
         System.out.println("\nCOMBINED LIST (country, population):");
