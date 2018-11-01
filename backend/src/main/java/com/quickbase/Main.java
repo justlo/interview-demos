@@ -1,9 +1,13 @@
 package com.quickbase;
 
+import com.quickbase.devint.CombineLists;
 import com.quickbase.devint.DBManager;
 import com.quickbase.devint.DBManagerImpl;
 
 import java.sql.Connection;
+import java.util.HashMap;
+
+import javax.sound.midi.SysexMessage;
 
 /**
  * The main method of the executable JAR generated from this repository. This is to let you
@@ -20,6 +24,19 @@ public class Main {
         if (null == c ) {
             System.out.println("failed.");
             System.exit(1);
+        }
+
+        //Print table names and column names
+        //dbm.getTableInfo();
+
+        // Get HashMap of combined country and population data from database and concrete list
+        CombineLists combineList = new CombineLists();
+        HashMap<String, Integer> finalList = combineList.combineCountryPopList(c);
+
+        // Print out countries and populations
+        System.out.println("\nCOMBINED LIST (country, population):");
+        for (String key : finalList.keySet()) {
+            System.out.println(key + " " + finalList.get(key));
         }
 
     }
